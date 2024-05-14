@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "62288039537",
+    "project_id": "zeus---kup",
+    "storage_bucket": "zeus---kup.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62288039537:android:629bf7f3a759a18de495d0",
+        "android_client_info": {
+          "package_name": "eryaz.software.kup"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxewkvWiGpX4ejWbKSOhCpLLHRV-0Jc4o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
