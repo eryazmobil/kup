@@ -46,6 +46,7 @@ class OrderPickingDetailVM(
 
     private var selectedSuggestionIndex: Int = -1
     private var shelfId: Int = 0
+    private var quantityMultiplier: Int = 1
 
     private val _selectedSuggestion = MutableStateFlow<PickingSuggestionDto?>(null)
     var selectedSuggestion = _selectedSuggestion.asStateFlow()
@@ -141,6 +142,7 @@ class OrderPickingDetailVM(
             workActivityRepo.getBarcodeByCode(
                 code = productBarcode.value, companyId = SessionManager.companyId
             ).onSuccess {
+                quantityMultiplier = it.quantity
                 productId = it.product.id
                 _productQuantity.emit("x " + it.quantity.toString())
                 _productDetail.emit(it.product)
@@ -199,7 +201,7 @@ class OrderPickingDetailVM(
 
     fun updateOrderDetailCollectedAddQuantityForPda() {
         executeInBackground(showProgressDialog = true) {
-            val quantity = enteredQuantity.value.toInt()
+            val quantity = enteredQuantity.value.toInt() * quantityMultiplier
             orderRepo.updateOrderDetailCollectedAddQuantityForPda(
                 workActionId = TemporaryCashManager.getInstance().workAction?.workActionId.orZero(),
                 productId = productId,
@@ -334,7 +336,7 @@ class OrderPickingDetailVM(
     }
 
     private fun checkProductOrder() {
-        Log.d("TAG", "checkProductOrder: ${orderPickingDto?.orderDetailList}")
+
         orderPickingDto?.orderDetailList?.find {
             it.quantityCollected < it.quantity && it.product.id == productId
         }?.let { orderDetail ->
