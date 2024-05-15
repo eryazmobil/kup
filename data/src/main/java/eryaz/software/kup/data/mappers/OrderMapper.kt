@@ -30,7 +30,7 @@ fun OrderHeaderResponse.toDto() = OrderHeaderDto(
     notes = notes.orEmpty(),
     shippingType = shippingType?.toDto(),
     controlPoint = controlPoint?.toDto(),
-    collectPoint = collectPoint,
+    collectPoint = collectPoint.orEmpty(),
     workActivity = workActivity?.toDto(),
     documentNo = documentNo,
     documentDate = documentDate.getFormattedDate("dd.MM.yyyy HH:mm")
@@ -84,7 +84,7 @@ fun PackageOrderDetailResponse.toDto() = PackageOrderDetailDto(
     id = id,
     product = product.toDto(),
     quantity = quantity,
-    quantityShipped =quantityShipped,
+    quantityShipped = quantityShipped,
     quantityCollected = quantityCollected
 )
 
